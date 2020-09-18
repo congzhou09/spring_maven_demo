@@ -9,6 +9,7 @@ public class Application {
         ApplicationContext appContext = new ClassPathXmlApplicationContext("app-bean.xml");
 
         UserServiceImpl oneUserService = (UserServiceImpl) appContext.getBean("userService");
-        oneUserService.say(); // 打印 hey yeah
+        oneUserService.say(); // 验证IoC： 打印 hey yeah
+        oneUserService.getList(); // 验证DI： 打印 get user list ok
     }
 }

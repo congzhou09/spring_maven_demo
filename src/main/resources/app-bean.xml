@@ -3,5 +3,11 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="userService" class="com.congzhou.service.impl.UserServiceImpl"></bean>
+    <bean id="userDao" class="com.congzhou.dao.impl.UserDaoImpl"></bean>
+    <bean id="logger" class="com.congzhou.util.Logger"></bean>
+    <bean id="userService" class="com.congzhou.service.impl.UserServiceImpl">
+<!--        <constructor-arg ref="userDao"/>-->
+        <property ref="userDao" name="userDao"></property>
+        <property ref="logger" name="logger"></property>
+    </bean>
 </beans>
