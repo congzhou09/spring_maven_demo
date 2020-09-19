@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:component-scan base-package="com.congzhou.util" />
+<!--    <context:annotation-config />-->
 
     <bean id="userDao" class="com.congzhou.dao.impl.UserDaoImpl"></bean>
-    <bean id="logger" class="com.congzhou.util.Logger"></bean>
     <bean id="userService" class="com.congzhou.service.impl.UserServiceImpl">
 <!--        <constructor-arg ref="userDao"/>-->
         <property ref="userDao" name="userDao"></property>
-        <property ref="logger" name="logger"></property>
+    </bean>
+
+    <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="locations">
+            <list>
+                <value>classpath*:application.properties</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <property name="properties" ref="configProperties" />
     </bean>
 </beans>
