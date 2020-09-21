@@ -29,6 +29,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void getList(){
         logger.log("获取用户列表");
-        this.userDao.getList();
+        userDao.getList();
     }
 }
