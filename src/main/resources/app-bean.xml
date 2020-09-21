@@ -2,9 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-                           http://www.springframework.org/schema/context
-                           http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
 
     <context:component-scan base-package="com.congzhou.util" />
 <!--    <context:annotation-config />-->
@@ -14,6 +15,8 @@
 <!--        <constructor-arg ref="userDao"/>-->
         <property ref="userDao" name="userDao"></property>
     </bean>
+
+    <bean id="roleService" class="com.congzhou.service.impl.RoleServiceImpl"></bean>
 
     <bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="locations">
@@ -25,4 +28,14 @@
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
         <property name="properties" ref="configProperties" />
     </bean>
+
+    <bean id="serviceSayHandler" class="com.congzhou.aop.ServiceSayHandler"/>
+
+    <aop:config>
+        <aop:aspect ref="serviceSayHandler">
+            <aop:pointcut id="serviceSayMethod" expression="execution(* com.congzhou.service.*.say())" />
+            <aop:before method="beforeSay" pointcut-ref="serviceSayMethod" />
+            <aop:after method="afterSay" pointcut-ref="serviceSayMethod" />
+        </aop:aspect>
+    </aop:config>
 </beans>
