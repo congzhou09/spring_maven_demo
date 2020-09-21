@@ -24,3 +24,4 @@
 
 #### AOP
 ●对service包下所有类的say()方法的before和after做了切面处理；
+●使用AOP还需引入"aspectjweaver"；
