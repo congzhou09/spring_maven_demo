@@ -7,7 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Application {
     public static void main(String[] args) {
-        ApplicationContext appContext = new ClassPathXmlApplicationContext("app-bean.xml");
+        ApplicationContext appContext = new ClassPathXmlApplicationContext("app-context.xml");
 
         UserService oneUserService = (UserService) appContext.getBean("userService");
         oneUserService.say(); // 验证IoC： 打印 hey yeah
