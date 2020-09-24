@@ -1,9 +1,12 @@
 package com.congzhou.service.impl;
 
 import com.congzhou.dao.UserDao;
+import com.congzhou.model.User;
 import com.congzhou.service.UserService;
 import com.congzhou.util.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 
 public class UserServiceImpl implements UserService {
@@ -27,8 +30,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void getList(){
+    public List<User> getList(){
         logger.log("获取用户列表");
-        userDao.getList();
+        return userDao.getList();
     }
 }
