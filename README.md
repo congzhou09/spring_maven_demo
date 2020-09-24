@@ -12,8 +12,8 @@
 ◆UserServiceImpl依赖了UserDao，UserDao实例通过xml配置以及setter方式注入；
 
 
-#### Spring注解
-◇UserServiceImpl依赖了Logger，Logger实例通过Spring注解方式注入；
+#### Spring注解的应用与tips
+◇UserServiceImpl依赖了Logger，Logger实例通过Spring注解方式实现注入；
 
 ◇使用Spring注解需要为xml配置增加"context"的schema；
 
@@ -22,9 +22,21 @@
 ◇Value注解获取项目配置文件需要定义名为"propertyConfigurer"的bean；
 
 
-#### AOP
+#### AOP的应用与tips
 ●对service包下所有类的say()方法的before和after做了切面处理；
+
 ●使用AOP还需引入"aspectjweaver"；
+
+#### 增加SpringMVC支持tips
+△web.xml使用servlet-mapping映射所有请求到 DispatcherServlet 类型的servlet；
+
+△maven增加"spring-webmvc"的引入；
+
+△SpringMVC的全局配置可以在"app-contex.xml"中通过mvc schema实现，也可以使用@Configuration注释；
 
 #### SpringMVC测试
 ■启动项目运行：mvn jetty:run
+
+■访问 http://localhost:8080/user/about 返回Content-Type为 "text/html;charset=utf-8" 类型的字符串内容；
+
+■访问 http://localhost:8080/user/getList 返回Content-Type为 "application/json;charset=utf-8" 类型的JSON对象；
