@@ -16,8 +16,12 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "user")
 public class UserController {
-    @Autowired
     private UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping(path = "/about")
     public String printHello() {
